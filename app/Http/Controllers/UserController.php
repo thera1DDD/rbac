@@ -149,9 +149,9 @@ class UserController extends Controller
 
         return response()->json('ok',200);
 
-        
 
-      
+
+
     }
 
     /**
@@ -179,10 +179,16 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required',
+            'newpassword' => 'required|min:6|max:30|confirmed',
             'email' => 'required|email|unique:users,email,'.$user->id
         ]);
 
         $user->update($request->all());
+
+        //
+        $user->update([
+            'password' => bcrypt($request->newpassword)
+        ]);
 
         return redirect()->back()->with('success', 'Profile Successfully Updated');
     }
@@ -193,15 +199,6 @@ class UserController extends Controller
 
     public function postPassword(Request $request){
 
-        $this->validate($request, [
-            'newpassword' => 'required|min:6|max:30|confirmed'
-        ]);
-
-        $user = auth()->user();
-
-        $user->update([
-            'password' => bcrypt($request->newpassword)
-        ]);
 
         return redirect()->back()->with('success', 'Password has been Changed Successfully');
     }
@@ -230,6 +227,6 @@ class UserController extends Controller
         return response()->json([
             'users' => $users
         ], 200);
-        
+
     }
 }

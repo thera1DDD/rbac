@@ -63,6 +63,25 @@ Profile
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <div class="form-group">
+                                                <label for="newpassword">Enter New Password</label>
+                                                <input type="password" name="newpassword"  id="newpassword" class="form-control @error('newpassword') is-invalid @enderror" value="" required placeholder="New Password">
+                                                @error('newpassword')
+                                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="newpassword_confirmation">Confirm New Password</label>
+                                                <input type="password" name="newpassword_confirmation"  id="newpassword_confirmation" class="form-control @error('newpassword_confirmation') is-invalid @enderror" value="" required placeholder="Confirm Password">
+                                                @error('newpassword_confirmation')
+                                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                                @enderror
+                                            </div>
 
 
                                         </div>

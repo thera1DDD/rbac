@@ -21,9 +21,6 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::resource('user', 'UserController');
-
-    Route::resource('permission', 'PermissionController');
 
 
     Route::get('/profile', 'UserController@profile')->name('user.profile');
@@ -38,21 +35,53 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::group(['middleware' => ['auth', 'role_or_permission:admin|create role|create permission']], function() {
 
-    Route::resource('role', 'RoleController');
+    Route::group(['prefix' => 'language'], function (){
+        Route::get('/','LanguageController@index')->name('language.index');
+        Route::get('/create','LanguageController@create')->name('language.create');
+        Route::post('/','LanguageController@store')->name('language.store');
+        Route::get('/{language}/edit',"LanguageController@edit")->name('language.edit');
+    });
 
+    Route::group(['prefix' => 'course'], function (){
+        Route::get('/','CourseController@index')->name('course.index');
+        Route::get('/create','CourseController@create')->name('course.create');
+        Route::post('/','CourseController@store')->name('course.store');
+        Route::get('/{course}/edit',"CourseController@edit")->name('course.edit');
+    });
+
+
+//    //course
+//    Route::resource('course','CourseController');
+//    //
+    //users
+    Route::resource('user', 'UserController');
+    Route::resource('permission', 'PermissionController');
+    Route::resource('role', 'RoleController');
+    //
 
 });
-
-
-
-
-
 
 
 Auth::routes();
 
 
-//////////////////////////////// axios request
+    //////////////////////////////// axios request for course
+//
+//    Route::get('/getAllPermission', 'PermissionController@getAllPermissions');
+//    Route::post("/postRole", "CourseController@store");
+//    Route::get("/getAllCourses", "CourseController@getAll");
+//    Route::get("/getAllRoles", "CourseController@getAll");
+//    Route::get("/getAllPermissions", "PermissionController@getAll");
+//
+//    /////////////axios create course
+//    Route::post('/account/create', 'UserController@store');
+//    Route::put('/account/update/{id}', 'UserController@update');
+//    Route::delete('/delete/user/{id}', 'UserController@delete');
+//    Route::get('/search/user', 'UserController@search');
+//
+
+
+//////////////////////////////// axios request for user
 
 Route::get('/getAllPermission', 'PermissionController@getAllPermissions');
 Route::post("/postRole", "RoleController@store");

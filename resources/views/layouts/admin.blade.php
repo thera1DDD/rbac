@@ -71,26 +71,34 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item">
-                            <a href="{{route('home')}}" class="nav-link">
-                                <i class="nav-icon fas fa-chalkboard"></i>
-                                <p>
-                                    Cources
-                                </p>
-                            </a>
-                        </li>
 
                         @can('view user')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-cogs"></i>
                                 <p>
-                                    Management
+                                    Admin
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 @can('create role')
+                                    <li class="nav-item">
+                                        <a href="{{route('course.index')}}" class="nav-link">
+                                            <i class="nav-icon fas fa-chalkboard"></i>
+                                            <p>
+                                                Cources
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('language.index')}}" class="nav-link">
+                                            <i class="nav-icon fas fa-chalkboard"></i>
+                                            <p>
+                                                Languages
+                                            </p>
+                                        </a>
+                                    </li>
                                     <li class="nav-item">
                                         <a href="{{ route('role.index') }}" class="nav-link">
                                             <i class="fas fa-bomb nav-icon"></i>
@@ -112,6 +120,7 @@
                                     </a>
                                 </li>
                                 @endcan
+
                             </ul>
                         </li>
                         @endcan
@@ -123,20 +132,6 @@
                                 </p>
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('userGetPassword') }}" class="nav-link">
-                            <i class="fas fa-lock nav-icon"></i>
-                            <p>Change Password</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('userGetPassword') }}" class="nav-link">
-                                <i class="fas fa-lock nav-icon"></i>
-                                <p>Курсы</p>
-                            </a>
-                        </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
