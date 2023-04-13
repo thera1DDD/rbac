@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Modul extends Model
+class Module extends Model
 {
-    protected $table = 'courses';
+    protected $table = 'moduls';
     protected $guarded = false;
 
     public function course(){
@@ -15,7 +15,4 @@ class Modul extends Model
         return $this->belongsTo(Course::class,'courses_id','id');
     }
 
-    public function getMainImageAttribute(){
-        return url('storage/'.  $this->main_image);
-    }
 }

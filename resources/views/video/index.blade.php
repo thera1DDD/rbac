@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Courses
+    Moduls
 @endsection
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Course</h3>
+            <h3 class="card-title">Videos</h3>
 
             <div class="card-tools">
-                <a href="{{ route('course.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new course</a>
+                <a href="{{ route('video.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new video</a>
             </div>
         </div>
         <!-- /.card-header -->
@@ -19,27 +19,27 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Language</th>
-                    <th>Main Image</th>
-                    <th>Slug</th>
+                    <th>Description</th>
+                    <th>Module</th>
+                    <th>Video_file</th>
                     <th>Date Posted</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse ($courses as $course)
+                @forelse ($videos as $video)
                     <tr>
-                        <td>{{ $course->id }}</td>
-                        <td>{{ $course->name }}</td>
-                        <td>{{ $course->language->name}}</td>
-                        <td><a href="{{route('course.play', $course->id)}}">{{$course->main_image}}</a></td>
-                        <td>{{ $course->slug }}</td>
-                        <td>{{ $course->created_at }}</td>
+                        <td>{{ $video->id }}</td>
+                        <td>{{ $video->name }}</td>
+                        <td>{{ $video->description }}</td>
+                        <td>{{ $video->module->name}}</td>
+                        <td><a href="{{route('video.play', $video->id)}}">{{$video->video_file}}</a></td>
+                        <td>{{ $video->created_at }}</td>
                         <td>
-                            <a style="width: 66px" href="{{ route('course.edit', $course->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a style="width: 66px"  href="{{ route('video.edit', $video->id) }}" class="btn btn-sm btn-warning">Edit</a>
                             <br>
 
-                            <form action="{{route('course.delete',$course->id) }}" method="post">
+                            <form action="{{route('video.delete',$video->id) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <input style="height: 30px;"  type="submit" value="Delete" class="btn btn-danger">
@@ -47,7 +47,6 @@
                         </td>
                     </tr>
                 @empty
-                    <tr>No Result Found</tr>
                 @endforelse
                 </tbody>
             </table>

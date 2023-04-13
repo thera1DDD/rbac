@@ -15,11 +15,16 @@ class CreateModulsTable extends Migration
     {
         Schema::create('moduls', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('name');
             $table->string('description');
             $table->double('number');
             $table->string('slug');
-            $table->foreignId('courses_id')->nullable()->index()->constrained('courses');
+            $table->foreignId('courses_id')
+                ->nullable()
+                ->index()
+                ->constrained('courses')
+                ->onDelete('cascade');
             $table->string('main_image');
         });
     }

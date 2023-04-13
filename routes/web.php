@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth', 'role_or_permission:admin|create role|cre
         Route::get('/create','LanguageController@create')->name('language.create');
         Route::post('/','LanguageController@store')->name('language.store');
         Route::get('/{language}/edit',"LanguageController@edit")->name('language.edit');
+        Route::patch('{language}',"LanguageController@update")->name('language.update');
+        Route::delete('{language}',"LanguageController@delete")->name('language.delete');
     });
 
     Route::group(['prefix' => 'course'], function (){
@@ -47,40 +49,40 @@ Route::group(['middleware' => ['auth', 'role_or_permission:admin|create role|cre
         Route::get('/create','CourseController@create')->name('course.create');
         Route::post('/','CourseController@store')->name('course.store');
         Route::get('/{course}/edit',"CourseController@edit")->name('course.edit');
+        Route::patch('{course}',"CourseController@update")->name('course.update');
+        Route::delete('{course}',"CourseController@delete")->name('course.delete');
+        Route::get('/{course}',"CourseController@play")->name('course.play');
+    });
+
+    Route::group(['prefix' => 'module'], function (){
+        Route::get('/','ModuleController@index')->name('module.index');
+        Route::get('/create','ModuleController@create')->name('module.create');
+        Route::post('/','ModuleController@store')->name('module.store');
+        Route::get('/{module}/edit',"ModuleController@edit")->name('module.edit');
+        Route::patch('{module}',"ModuleController@update")->name('module.update');
+        Route::delete('{module}',"ModuleController@delete")->name('module.delete');
+    });
+
+    Route::group(['prefix' => 'video'], function (){
+        Route::get('/','VideoController@index')->name('video.index');
+        Route::get('/create','VideoController@create')->name('video.create');
+        Route::post('/','VideoController@store')->name('video.store');
+        Route::get('/{video}/edit',"VideoController@edit")->name('video.edit');
+        Route::patch('{video}',"VideoController@update")->name('video.update');
+        Route::delete('{video}',"VideoController@delete")->name('video.delete');
+        Route::get('/{video}',"VideoController@play")->name('video.play');
     });
 
 
-//    //course
-//    Route::resource('course','CourseController');
-//    //
-    //users
+
     Route::resource('user', 'UserController');
     Route::resource('permission', 'PermissionController');
     Route::resource('role', 'RoleController');
-    //
 
 });
 
 
 Auth::routes();
-
-
-    //////////////////////////////// axios request for course
-//
-//    Route::get('/getAllPermission', 'PermissionController@getAllPermissions');
-//    Route::post("/postRole", "CourseController@store");
-//    Route::get("/getAllCourses", "CourseController@getAll");
-//    Route::get("/getAllRoles", "CourseController@getAll");
-//    Route::get("/getAllPermissions", "PermissionController@getAll");
-//
-//    /////////////axios create course
-//    Route::post('/account/create', 'UserController@store');
-//    Route::put('/account/update/{id}', 'UserController@update');
-//    Route::delete('/delete/user/{id}', 'UserController@delete');
-//    Route::get('/search/user', 'UserController@search');
-//
-
-
 //////////////////////////////// axios request for user
 
 Route::get('/getAllPermission', 'PermissionController@getAllPermissions');

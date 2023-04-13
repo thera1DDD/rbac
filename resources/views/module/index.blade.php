@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Courses
+    Moduls
 @endsection
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Course</h3>
+            <h3 class="card-title">Moduls</h3>
 
             <div class="card-tools">
-                <a href="{{ route('course.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new course</a>
+                <a href="{{ route('module.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create new modul</a>
             </div>
         </div>
         <!-- /.card-header -->
@@ -19,7 +19,9 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Language</th>
+                    <th>Description</th>
+                    <th>Number</th>
+                    <th>Course</th>
                     <th>Main Image</th>
                     <th>Slug</th>
                     <th>Date Posted</th>
@@ -27,19 +29,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse ($courses as $course)
+                @forelse ($modules as $module)
                     <tr>
-                        <td>{{ $course->id }}</td>
-                        <td>{{ $course->name }}</td>
-                        <td>{{ $course->language->name}}</td>
-                        <td><a href="{{route('course.play', $course->id)}}">{{$course->main_image}}</a></td>
-                        <td>{{ $course->slug }}</td>
-                        <td>{{ $course->created_at }}</td>
+                        <td>{{ $module->id }}</td>
+                        <td>{{ $module->name }}</td>
+                        <td>{{ $module->description }}</td>
+                        <td>{{ $module->number }}</td>
+                        <td>{{ $module->course->name}}</td>
+                        <td>{{ $module->main_image }}</td>
+                        <td>{{ $module->slug }}</td>
+                        <td>{{ $module->created_at }}</td>
                         <td>
-                            <a style="width: 66px" href="{{ route('course.edit', $course->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a style="width: 66px"  href="{{ route('module.edit', $module->id) }}" class="btn btn-sm btn-warning">Edit</a>
                             <br>
 
-                            <form action="{{route('course.delete',$course->id) }}" method="post">
+                            <form action="{{route('module.delete',$module->id) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <input style="height: 30px;"  type="submit" value="Delete" class="btn btn-danger">
@@ -47,7 +51,6 @@
                         </td>
                     </tr>
                 @empty
-                    <tr>No Result Found</tr>
                 @endforelse
                 </tbody>
             </table>

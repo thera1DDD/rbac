@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 
 @section('title')
-Create Course
+Create Module
 @endsection
 @section('content')
 <div class="card card-primary">
     <div class="card-header">
-        <h3 class="card-title">Add new Course</h3>
+        <h3 class="card-title">Add new Module</h3>
         <div class="card-tools">
-            <a href="{{ route('course.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Courses</a>
+            <a href="{{ route('module.index') }}" class="btn btn-danger"><i class="fas fa-shield-alt"></i> See all Modules</a>
         </div>
     </div>
-    <form method="POST" action="{{ route('course.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('module.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
             <div class="form-group">
@@ -24,19 +24,36 @@ Create Course
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">Language</label>
-                <select name="languages_id"  id="languages_id" class="form-control select2" data-placeholder="Выберите язык" style="width: 100%;">
-                    @foreach($languages as $language)
-                        <option value="{{$language->id}}">{{$language->name}}</option>
-                    @endforeach()
-                </select>
-                @error('language_id')
+                <label for="name">Description</label>
+                <input type="text" name="description"  id="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" required placeholder="Название">
+                @error('description')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
             </div>
-
+            <div class="form-group">
+                <label for="name">Number</label>
+                <input type="text" name="number"  id="number" class="form-control @error('number') is-invalid @enderror" value="{{ old('number') }}" required placeholder="Название">
+                @error('number')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">Course</label>
+                <select name="courses_id"  id="course_id" class="form-control select2" data-placeholder="Выберите курс" style="width: 100%;">
+                    @foreach($courses as $course)
+                        <option value="{{$course->id}}">{{$course->name}}</option>
+                    @endforeach()
+                </select>
+                @error('course_id')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
             <div class="form-group">
                 <label for="name">Main Image</label>
                 <div class="input-group">
@@ -63,9 +80,7 @@ Create Course
                     </span>
                 @enderror
             </div>
-
         </div>
-
         <div class="card-footer">
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create Language</button>
         </div>

@@ -30,7 +30,14 @@ Languages
                         <td>{{ $language->name }}</td>
                         <td>{{ $language->created_at }}</td>
                         <td>
-                            <a href="{{ route('language.edit', $language->id) }}" class="btn btn-sm btn-warning">Edit Language</a>
+                            <a style="width: 66px" href="{{ route('language.edit', $language->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <br>
+
+                            <form action="{{route('language.delete',$language->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <input style="height: 30px;"  type="submit" value="Delete" class="btn btn-danger">
+                            </form>
                         </td>
                     </tr>
                 @empty

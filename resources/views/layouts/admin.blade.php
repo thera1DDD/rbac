@@ -92,10 +92,26 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="{{route('module.index')}}" class="nav-link">
+                                            <i class="nav-icon fas fa-chalkboard"></i>
+                                            <p>
+                                                Modules
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="{{route('language.index')}}" class="nav-link">
                                             <i class="nav-icon fas fa-chalkboard"></i>
                                             <p>
                                                 Languages
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('video.index')}}" class="nav-link">
+                                            <i class="nav-icon fas fa-chalkboard"></i>
+                                            <p>
+                                                Videos
                                             </p>
                                         </a>
                                     </li>
